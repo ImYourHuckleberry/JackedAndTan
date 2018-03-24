@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8" />
-    <title th:text="${title}">Title</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
 <h1 th:text="${title}">default title</h1>
-<a href="/jackedandtan/addlift">add lift</a>
+<nav th:replace="fragments :: navigation"></nav>
 <ul>
     <li th:each="lift : ${lifts}" th:text="${lift}"></li>
 <!--$lifts here will search the model for things names "lifts". This repeats the element tag for each lift in lifts-->

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">My Lifts</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+
+</head>
+<body>
+<nav th:fragment="navigation">
+    <a href="/jackedandtan">One Rep Max</a>
+    <a href="/jackedandtan/addlift">Add Lift</a>
+    <a href="/jackedandtan/photos">Photos</a>
+    <a href="/jackedandtan/workout">Workout</a>
+    <a href="/jackedandtan/profile">Profile</a>
+</nav>
+</body>
+</html>
