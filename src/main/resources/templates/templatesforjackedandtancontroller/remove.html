@@ -10,8 +10,8 @@
 <form method="post">
 
     <div th:each="lift : ${lifts}" class="checkbox">
-        <input type="checkbox" name="lift" th:value="${lift}" th:id="${lift}"/>
-        <label th:for="${lift}" th:text="${lift}"></label>
+        <input type="checkbox" name="lift" th:value="${lift.lift}" th:id="${lift.lift}"/>
+        <label th:for="${lift.lift}" th:text="${lift.lift}"></label>
         <br />
     </div>
 

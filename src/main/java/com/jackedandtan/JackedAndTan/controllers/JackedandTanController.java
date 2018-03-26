@@ -1,5 +1,6 @@
 package com.jackedandtan.JackedAndTan.controllers;
 
+import com.jackedandtan.JackedAndTan.models.Lift;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,11 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.jackedandtan.JackedAndTan.models.Lift;
 
 @Controller
 @RequestMapping("jackedandtan")
 public class JackedandTanController {
-    static HashMap<String, String> lifts = new HashMap<>();
+    static ArrayList<Lift> lifts = new ArrayList<>();
     // request path "/jackedandtan"
 
 
@@ -38,15 +40,17 @@ public class JackedandTanController {
     }
     @RequestMapping(value="addlift", method= RequestMethod.POST)
     public String processAddForm(@RequestParam() String liftName, @RequestParam String liftWeight) {
+
         //RequestParam says it shoud look for the parameter with the same name found in addlift and insert
-        lifts.put(liftName, liftWeight);
+        Lift newLift = new Lift(liftName, liftWeight);
+        lifts.add(newLift);
 
         return "redirect:";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveLiftForm(Model model) {
-        model.addAttribute("lifts", lifts.keySet());
+        model.addAttribute("lifts", lifts);
         model.addAttribute("title", "Remove Lift");
         return "templatesforjackedandtancontroller/remove";
     }
