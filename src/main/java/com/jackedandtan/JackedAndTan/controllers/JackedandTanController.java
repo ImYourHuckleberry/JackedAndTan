@@ -6,23 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import com.jackedandtan.JackedAndTan.models.Lift;
 
 @Controller
 @RequestMapping("jackedandtan")
 public class JackedandTanController {
-    static ArrayList<Lift> lifts = new ArrayList<>();
+
     // request path "/jackedandtan"
 
 
     @RequestMapping(value="" )
     public String index(Model model){
 
-        model.addAttribute("lifts", lifts);
+        model.addAttribute("lifts", LiftData.getAll());
         //will pass data from controller to view this time passing an array list
         model.addAttribute("title", "One Rep Max");
         return "templatesforjackedandtancontroller/index";
