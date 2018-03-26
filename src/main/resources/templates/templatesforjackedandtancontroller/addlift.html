@@ -5,10 +5,21 @@
 <body>
 <h1 th:text="${title}">default title</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<form method="post">
-    <input type="text" name="liftName" />
+<form method="post" style="max-width:600px">
+    <div class="form-group">
+        <label for="name-field">Name</label>
+        <input class="form-control" id="name-field" type="text" name="liftName"/>
+
+    </div>
+    <div class = "form-group">
+        <label for = "desc-field">Weight</label>
+        <input class="form control" id="desc-field" type="text" name="liftWeight"/>
+    </div>
     <input type = "submit" value="Addlift" />
 </form>
 
 </body>
 </html>
+
+
+

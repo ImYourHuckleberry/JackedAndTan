@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body class="container">
+
+<body class="container body-content">
+
 <h1 th:text="${title}">default title</h1>
+
 <nav th:replace="fragments :: navigation"></nav>
+
+
+
+
 <table class = "table">
     <tr>
         <th>Lift</th>
         <th>One Rep Max</th>
     </tr>
+
+    <tr th:each = "lift : ${lifts}">
+        <td th:text="${lift.key}"></td>
+        <td th:text="${lift.value}"></td>
+    </tr>
 </table>
 
-<ul>
-    <li th:each="lift : ${lifts}" th:text="${lift}"></li>
-<!--$lifts here will search the model for things names "lifts". This repeats the element tag for each lift in lifts-->
 
-</ul>
-<!--title here is refering to what we named our model in the controller-->
 </body>
 </html>
