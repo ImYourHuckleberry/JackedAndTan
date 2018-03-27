@@ -1,8 +1,21 @@
 package com.jackedandtan.JackedAndTan.models;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Lift {
+    @NotNull
+    @Size(min=2, max=20)
     private String lift;
+
+    @NotNull
+    @Size(min=1, message = "You gotta lift something, bro!")
     private String weight;
+
+    private T1LiftType type;
+
+
+
     private int liftId;
     //unique number that will identify each object in cheese class as differentand
     //unique
@@ -52,5 +65,13 @@ public class Lift {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public T1LiftType getType() {
+        return type;
+    }
+
+    public void setType(T1LiftType type) {
+        this.type = type;
     }
 }

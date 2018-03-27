@@ -15,11 +15,13 @@
     <tr>
         <th>Lift</th>
         <th>One Rep Max</th>
+        <th>Type</th>
     </tr>
 
     <tr th:each = "lift : ${lifts}">
         <td th:text="${lift.lift}"></td>
         <td th:text="${lift.weight}"></td>
+        <td th:text="${lift.type.name}"></td>
     </tr>
 </table>
 

@@ -10,7 +10,7 @@ public class LiftData {
         return lifts;
     }
     //getAll
-    public static void(Lift newLift){
+    public static void add (Lift newLift){
         lifts.add(newLift);
     }
     //add

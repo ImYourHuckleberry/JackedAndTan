@@ -1,13 +1,17 @@
 package com.jackedandtan.JackedAndTan.controllers;
 
 import com.jackedandtan.JackedAndTan.models.Lift;
+import com.jackedandtan.JackedAndTan.models.LiftData;
+import com.jackedandtan.JackedAndTan.models.T1LiftType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("jackedandtan")
@@ -31,32 +35,55 @@ public class JackedandTanController {
     @RequestMapping(value="addlift", method = RequestMethod.GET)
     public String displayAddLiftForm(Model model){
         model.addAttribute("title", "Add Lift");
+        model.addAttribute(new Lift());
+        model.addAttribute("t1LiftTypes", T1LiftType.values());
+        //by passing empty lift we can use properties to render form corrently
         return "templatesforjackedandtancontroller/addlift";
 
 
     }
     @RequestMapping(value="addlift", method= RequestMethod.POST)
-    public String processAddForm(@RequestParam() String liftName, @RequestParam String liftWeight) {
+    public String processAddForm(@ModelAttribute @Valid Lift newLift,
+                                 Errors errors, Model model) {
 
-        //RequestParam says it shoud look for the parameter with the same name found in addlift and insert
-        Lift newLift = new Lift(liftName, liftWeight);
-        lifts.add(newLift);
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Add Lift");
+            return "templatesforjackedandtancontroller/addlift";
+        }
+
+        LiftData.add(newLift);
+        /**
+         *
+         *Lift newLift = newLift();    (calling constructor)
+         * newLift.setName(Request.getParameter("name"));
+         *          ^ framework will go to request thats come in
+         *          look for parameter that corresponds to same names as field
+         * newLift.setWeight(Request.getParameter("weight"));
+         *          ^ same as above
+         *          this is why is is important for the names pf teh fields to match up with the names of the form field in the class
+         *          must match exactly
+         *  validation is possible because of this
+         *  this is MODEL BINDING
+         *
+         *
+         *
+         */
 
         return "redirect:";
     }
-
+    //^^^includes model binding between liftWeight and liftName
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveLiftForm(Model model) {
-        model.addAttribute("lifts", lifts);
+        model.addAttribute("lifts", LiftData.getAll());
         model.addAttribute("title", "Remove Lift");
         return "templatesforjackedandtancontroller/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveLiftForm(@RequestParam ArrayList<String> lift) {
+    public String processRemoveLiftForm(@RequestParam int[] liftIds) {
 
-        for (String aLift : lift) {
-            lifts.remove(aLift);
+        for (int liftId : liftIds){
+            LiftData.remove(liftId);
         }
 
         return "redirect:";
