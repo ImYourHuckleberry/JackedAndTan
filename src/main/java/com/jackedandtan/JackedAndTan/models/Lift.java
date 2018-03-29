@@ -5,14 +5,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 @Entity
 public class Lift {
+
     @Id
     @GeneratedValue
     private int id;
 
     @NotNull
-    @Size(min=2, max=20)
+    @Size(min=3, max=20)
     private String lift;
 
     @NotNull
@@ -33,6 +35,7 @@ public class Lift {
     public int getId(){
         return id;
     }
+
     public String getLift() {
         return lift;
     }
