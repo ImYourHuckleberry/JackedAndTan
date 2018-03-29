@@ -1,9 +1,16 @@
 package com.jackedandtan.JackedAndTan.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+@Entity
 public class Lift {
+    @Id
+    @GeneratedValue
+    private int id;
+
     @NotNull
     @Size(min=2, max=20)
     private String lift;
@@ -14,43 +21,18 @@ public class Lift {
 
     private T1LiftType type;
 
-
-
-    private int liftId;
-    //unique number that will identify each object in cheese class as differentand
-    //unique
-    private static int nextId=1;
-
-
     public Lift(String lift, String weight) {
-        this();
-        //says call the default constructor for the given class
-        //this will call the id field
         this.lift = lift;
         this.weight = weight;
     }
     public Lift(){
-        liftId=nextId;
-        nextId++;
-        //gets new number ere time
     }
 
-    public int getLiftId() {
-        return liftId;
-    }
 
-    public void setLiftId(int liftId) {
-        this.liftId = liftId;
-    }
 
-    public static int getNextId() {
-        return nextId;
+    public int getId(){
+        return id;
     }
-
-    public static void setNextId(int nextId) {
-        Lift.nextId = nextId;
-    }
-
     public String getLift() {
         return lift;
     }
